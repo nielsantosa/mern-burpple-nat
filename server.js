@@ -1,6 +1,7 @@
 const express = require('express')
 const next = require('next')
 const { registerApiRoutes } = require('./src/api/router/apiRoutes')
+const { newRepositories } = require('./src/api/repositories/repositories')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
@@ -11,10 +12,16 @@ const handle = app.getRequestHandler()
 
 app.prepare()
 .then(() => {
+  // setup express
   const server = express()
 
+  // parse request bodies (req.body)
+  server.use(express.json())
+  server.use(express.urlencoded({ extended: true }))
+
   // register api urls
-  registerApiRoutes(server)
+  const repo = newRepositories()
+  registerApiRoutes(server, repo)
 
   // register next pages urls
   server.get('*', (req, res) => {

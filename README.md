@@ -4,8 +4,8 @@
 ### DB Schema
 Users
 - id
-- email
-- password
+- email # TODO
+- password # TODO
 - name
 
 Restaurants
@@ -26,14 +26,18 @@ RestaurantsCollections
 #### Restaurants
 GET /api/restaurants/:id : Show details of a restaurant
 GET /api/restaurants : Show all restaurants
-POST /api/restaurants : Create a new restaurant
-DELETE /api/restaurants/:id : Delete a restaurant
-PUT /api/restaurants/:id : Update a restaurant
+POST /api/restaurants : Create a new restaurant # TODO
+DELETE /api/restaurants/:id : Delete a restaurant # TODO
+PUT /api/restaurants/:id : Update a restaurant # TODO
 
 #### Restaurants Collections
-GET /api/collections/restaurants : List all restaurants on my list
+GET /api/collections/restaurants?user_id=xxx : List all restaurants on my list
 POST /api/collection/restaurants : Add restaurants to my list
-DELETE /api/collection/restaurants/:id : Remove restaurants from my list
+{
+    user_id: xxx
+    restaurant_id: xxx
+}
+DELETE /api/collection/restaurants/:id?user_id=xxx : Remove restaurants from my list
 
 ## High Level Architecture Design
 ### Server
