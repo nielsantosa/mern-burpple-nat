@@ -1,7 +1,7 @@
 const express = require('express')
 const next = require('next')
-const { registerApiRoutes } = require('./src/api/router/apiRoutes')
-const { newRepositories } = require('./src/api/repositories/repositories')
+const { registerApiRoutes } = require('./server/router/apiRoutes')
+const { newRepositories } = require('./server/repositories/repositories')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
