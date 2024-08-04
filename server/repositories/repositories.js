@@ -3,6 +3,7 @@ const { getRestaurantById } = require('./getRestaurantById')
 const { getCollectionsByUserId } = require('./getCollectionsByUserId')
 const { createCollectionsByUserId } = require('./createCollectionsByUserId')
 const { deleteCollectionsByUserId } = require('./deleteCollectionsByUserId')
+const { getRestaurantsWithIsUser } = require('./getRestaurantsWithIsUser')
 const { initializeDB } = require('./db')
 
 
@@ -13,6 +14,10 @@ class Repositories {
 
     getRestaurants () {
         return getRestaurants(this.db)
+    }
+
+    getRestaurantsWithIsUser (userId) {
+        return getRestaurantsWithIsUser(this.db, userId)
     }
 
     getRestaurantById (id) {

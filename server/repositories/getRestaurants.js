@@ -1,5 +1,5 @@
 function getRestaurants (db) {
-    const sql = 'SELECT * FROM restaurants'
+    const sql = 'SELECT id, name, description FROM restaurants'
     
     return new Promise((resolve, reject) => {
         db.all(sql, (err, rows) => {

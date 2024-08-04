@@ -1,5 +1,5 @@
 function getCollectionsByUserId(req, res, repo) {
-    userId = req.query.user_id;
+    const userId = req.query.user_id;
 
     if (userId == null) {
         res.status(400).json({ error: 'user_id is required' })

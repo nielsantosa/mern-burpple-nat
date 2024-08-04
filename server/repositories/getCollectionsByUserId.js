@@ -1,6 +1,6 @@
 function getCollectionsByUserId (db, userId) {
     const sql = `
-        SELECT *
+        SELECT r.id, r.name, r.description
         FROM restaurants r
         JOIN restaurant_collections rc ON rc.restaurant_id = r.id
         WHERE rc.user_id = ?
