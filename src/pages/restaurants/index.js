@@ -3,14 +3,15 @@ import CardList from '../../components/cardList';
 import { defaultImage } from '../../lib/consts'
 import { useRouter } from 'next/router';
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     const userId = 1; // default
-    const res = await fetch(`http://localhost:3000/api/restaurants?user_id=${userId}`)
+    const hostname = context.req.headers.host
+    const res = await fetch(`http://${hostname}/api/restaurants?user_id=${userId}`)
     const restaurants = await res.json();
 
     restaurants.forEach((restaurant) => {
         if (!restaurant.image) {
-        restaurant.image = `http://localhost:3000${defaultImage}`;
+        restaurant.image = defaultImage;
         }
     });
   

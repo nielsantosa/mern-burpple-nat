@@ -6,24 +6,25 @@ import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
-    const res = await fetch(`http://localhost:3000/api/restaurants/${id}`);
+    const hostname = context.req.headers.host
+    const res = await fetch(`http://${hostname}/api/restaurants/${id}`);
     let restaurant = {};
     try {
       restaurant = await res.json();
     } catch (err) {
     }
 
-    const image = `http://localhost:3000${defaultImage}`;
-    restaurant.image = image;
+    restaurant.image = defaultImage;
   
     return {
         props: {
             restaurant,
+            hostname,
         },
     };
 }
 
-const Restaurant = ({ restaurant }) => {
+const Restaurant = ({ restaurant, hostname }) => {
   const router = useRouter();
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
@@ -37,7 +38,7 @@ const Restaurant = ({ restaurant }) => {
 
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:3000/api/restaurants/${restaurant.id}`, {
+      await fetch(`http://${hostname}/api/restaurants/${restaurant.id}`, {
         method: 'DELETE',
       });
       router.push('/restaurants');
