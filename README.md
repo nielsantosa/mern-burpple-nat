@@ -21,17 +21,9 @@ Future possibility of the product will involve :
 - /restaurants/:id/edit : Edit a restaurant detail
 
 ## High Level Architecture Design
-### Server
-Backend and Frontend : Next.js with Express.js as Custom Server is used.\
-Next.js is used as Frontend framework
-Express.js is used as Backend framework
+Refer to ARCHITECTURE.md
 
-Next.js -> Allow for Client and Server Side Rendering.
-Express.js -> Allow more flexibility to add additional Endpoints for data fetching / backend instead of relying on Next.js Router.
-
-### Database
-In order to simplify deployments, sqlite3 with in-memory database is used.
-
+## Technical Deep Dive
 ### DB Schema
 Restaurants
 - id
@@ -47,7 +39,7 @@ User
 - email
 - password
 
-### API
+### Backend API
 #### Restaurants
 - GET /api/restaurants/:id : Show details of a restaurant
 - GET /api/restaurants : Show all restaurants
