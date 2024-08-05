@@ -8,7 +8,10 @@ function initializeDB () {
             CREATE TABLE restaurants (
                 id INTEGER PRIMARY KEY,
                 name TEXT,
-                description TEXT
+                description TEXT,
+                address TEXT,
+                cuisine TEXT,
+                user_id REFERENCES users(id)
             );`
         )
         db.run(`
@@ -18,23 +21,6 @@ function initializeDB () {
             );`
         )
         db.run(`
-            CREATE TABLE restaurant_collections (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER REFERENCES users(id),
-                restaurant_id INTEGER REFERENCES restaurants(id),
-                UNIQUE (user_id, restaurant_id)
-            );`
-        )
-        db.run(`
-            INSERT INTO restaurants
-            VALUES
-                (1, "Pizza Hut", "A pizza restaurant"),
-                (2, "McDonalds", "A fast food restaurant"),
-                (3, "Burger King", "A fast food restaurant"),
-                (4, "Jolibee", "A chicken restaurant")
-            ;`
-        )
-        db.run(`
             INSERT INTO users
             VALUES
                 (1, "John"),
@@ -42,12 +28,12 @@ function initializeDB () {
             ;`
         )
         db.run(`
-            INSERT INTO restaurant_collections (user_id, restaurant_id)
+            INSERT INTO restaurants (id, name, description, address, cuisine, user_id)
             VALUES
-                (1, 1),
-                (1, 2),
-                (2, 1),
-                (2, 3)
+                (1, "Pizza Hut", "A pizza restaurant", "123 Main St", "Italian", 1),
+                (2, "McDonalds", "A fast food restaurant", "456 Main St", "American", 1),
+                (3, "Burger King", "A fast food restaurant", "789 Main St", "American", 1),
+                (4, "Jolibee", "A chicken restaurant", "123 Main St", "American", 1)
             ;`
         )
     })

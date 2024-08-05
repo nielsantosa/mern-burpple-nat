@@ -1,13 +1,13 @@
-function createCollectionsByUserId (db, userId, restaurantId) {
+function createRestaurant (db, name, description, address, cuisine, userId) {
     const sql = `
-        INSERT INTO restaurant_collections (user_id, restaurant_id)
-        VALUES (?, ?);
+        INSERT INTO restaurants (name, description, address, cuisine, user_id)
+        VALUES (?, ?, ?, ?, ?);
     `
     
     return new Promise((resolve, reject) => {
         db.run(
             sql,
-            [userId, restaurantId],
+            [name, description, address, cuisine, userId],
             (err) => {
                 if (err) {
                     reject(false, err);
@@ -19,4 +19,4 @@ function createCollectionsByUserId (db, userId, restaurantId) {
     });
 }
 
-module.exports = { createCollectionsByUserId }
+module.exports = { createRestaurant }

@@ -1,13 +1,18 @@
-function deleteCollectionsByUserId (db, userId, restaurantId) {
+function editRestaurant (db, name, description, address, cuisine, id) {
     const sql = `
-        DELETE FROM restaurant_collections
-        WHERE user_id = ? AND restaurant_id = ?;
+        UPDATE restaurants 
+        SET
+            name=?,
+            description=?,
+            address=?,
+            cuisine=?
+        WHERE id = ?;
     `
     
     return new Promise((resolve, reject) => {
         db.run(
             sql,
-            [userId, restaurantId],
+            [name, description, address, cuisine, id],
             (err) => {
                 if (err) {
                     reject(false, err);
@@ -19,4 +24,4 @@ function deleteCollectionsByUserId (db, userId, restaurantId) {
     });
 }
 
-module.exports = { deleteCollectionsByUserId }
+module.exports = { editRestaurant }

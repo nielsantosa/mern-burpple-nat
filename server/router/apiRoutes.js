@@ -1,8 +1,8 @@
-const { getRestaurants } = require('../controllers/restaurants/getRestaurants')
+const { getRestaurantsByUserId } = require('../controllers/restaurants/getRestaurantsByUserId')
 const { getRestaurantById } = require('../controllers/restaurants/getRestaurantById')
-const { getCollectionsByUserId } = require('../controllers/collections/getCollectionsByUserId')
-const { createCollectionsByUserId } = require('../controllers/collections/createCollectionsByUserId')
-const { deleteCollectionsByUserId } = require('../controllers/collections/deleteCollectionsByUserId')
+const { createRestaurant } = require('../controllers/restaurants/createRestaurant')
+const { editRestaurant } = require('../controllers/restaurants/editRestaurant')
+const { deleteRestaurantById } = require('../controllers/restaurants/deleteRestaurantById')
 
 function registerApiRoutes (server, repo) {
     server.get('/api/ping', (req, res) => {
@@ -11,21 +11,19 @@ function registerApiRoutes (server, repo) {
 
     // restaurants
     server.get('/api/restaurants', (req, res) => {
-        return getRestaurants(req, res, repo)
+        return getRestaurantsByUserId(req, res, repo)
     })
     server.get('/api/restaurants/:id', (req, res) => {
         return getRestaurantById(req, res, repo)
     })
-
-    // collections
-    server.get('/api/collections/restaurants', (req, res) => {
-        return getCollectionsByUserId(req, res, repo)
+    server.post('/api/restaurants', (req, res) => {
+        return createRestaurant(req, res, repo)
     })
-    server.post('/api/collections/restaurants', (req, res) => {
-        return createCollectionsByUserId(req, res, repo)
+    server.put('/api/restaurants/:id', (req, res) => {
+        return editRestaurant(req, res, repo)
     })
-    server.delete('/api/collections/restaurants/:restaurant_id', (req, res) => {
-        return deleteCollectionsByUserId(req, res, repo)
+    server.delete('/api/restaurants/:id', (req, res) => {
+        return deleteRestaurantById(req, res, repo)
     })
 };
 

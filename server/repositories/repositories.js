@@ -1,9 +1,8 @@
-const { getRestaurants } = require('./getRestaurants')
+const { getRestaurantsByUserId } = require('./getRestaurantsByUserId')
 const { getRestaurantById } = require('./getRestaurantById')
-const { getCollectionsByUserId } = require('./getCollectionsByUserId')
-const { createCollectionsByUserId } = require('./createCollectionsByUserId')
-const { deleteCollectionsByUserId } = require('./deleteCollectionsByUserId')
-const { getRestaurantsWithIsUser } = require('./getRestaurantsWithIsUser')
+const { createRestaurant } = require('./createRestaurant')
+const { editRestaurant } = require('./editRestaurant')
+const { deleteRestaurantById } = require('./deleteRestaurantById')
 const { initializeDB } = require('./db')
 
 
@@ -12,28 +11,24 @@ class Repositories {
         this.db = initializeDB()
     }
 
-    getRestaurants () {
-        return getRestaurants(this.db)
-    }
-
-    getRestaurantsWithIsUser (userId) {
-        return getRestaurantsWithIsUser(this.db, userId)
+    getRestaurantsByUserId (userId) {
+        return getRestaurantsByUserId(this.db, userId)
     }
 
     getRestaurantById (id) {
         return getRestaurantById(this.db, id)
     }
 
-    getCollectionsByUserId (userId) {
-        return getCollectionsByUserId(this.db, userId)
+    createRestaurant (name, description, address, cuisine, userId) {
+        return createRestaurant(this.db, name, description, address, cuisine, userId)
     }
 
-    createCollectionsByUserId (userId, restaurantId) {
-        return createCollectionsByUserId(this.db, userId, restaurantId)
+    editRestaurant (name, description, address, cuisine, userId) {
+        return editRestaurant(this.db, name, description, address, cuisine, userId)
     }
 
-    deleteCollectionsByUserId (userId, restaurantId) {
-        return deleteCollectionsByUserId(this.db, userId, restaurantId)
+    deleteRestaurantById (id) {
+        return deleteRestaurantById(this.db, id)
     }
 }
 
