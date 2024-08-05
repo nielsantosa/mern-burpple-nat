@@ -1,14 +1,16 @@
 import React from 'react';
 import CardList from '../../components/cardList';
+import { defaultImage } from '../../lib/consts'
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
-    const res = await fetch('http://localhost:3000/api/restaurants');
+    const userId = 1; // default
+    const res = await fetch(`http://localhost:3000/api/restaurants?user_id=${userId}`)
     const restaurants = await res.json();
 
-    const defaultImagePath = '/images/default-image.jpg';
     restaurants.forEach((restaurant) => {
         if (!restaurant.image) {
-        restaurant.image = `http://localhost:3000${defaultImagePath}`;
+        restaurant.image = `http://localhost:3000${defaultImage}`;
         }
     });
   
@@ -20,12 +22,26 @@ export async function getServerSideProps() {
 }
 
 const Restaurants = ({ restaurants }) => {
-    return (
-      <div>
-        <h1>Browse all Restaurants</h1>
-        <CardList restaurants={restaurants} />
-      </div>
-    );
+  const router = useRouter();
+
+  const handleAddRestaurant = () => {
+    router.push('/restaurants/create');
   };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <h1>My Restaurant Collections</h1>
+        <button
+          onClick={handleAddRestaurant}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
+        >
+          Add Restaurant
+        </button>
+      </div>
+      <CardList restaurants={restaurants} />
+    </div>
+  );
+};
   
-  export default Restaurants;
+export default Restaurants;

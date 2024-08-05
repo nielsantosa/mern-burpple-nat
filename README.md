@@ -2,42 +2,37 @@
 
 ## Product and Technical Requirements
 ### DB Schema
-Users
-- id
-- email # TODO
-- password # TODO
-- name
-
 Restaurants
 - id
 - name
 - description
+- address
+- cuisine
+- user_id REFERENCES users(id)
 
-RestaurantsCollections
+User
 - id
-- user_id REFERENCE users(id)
-- restaurant_id REFERENCE restaurants(id)
+- name
+- email
+- password
 
 ### Web
-/collections/restaurants : Show all restaurant on my list
 /restaurants : Show all restaurants
+/restaurants/create : Create a new restaurant
+/restaurants/update : Update a restaurant
+/restaurants/:id : Show a restaurant detail
 
 ### API
 #### Restaurants
 GET /api/restaurants/:id : Show details of a restaurant
 GET /api/restaurants : Show all restaurants
-POST /api/restaurants : Create a new restaurant # TODO
-DELETE /api/restaurants/:id : Delete a restaurant # TODO
-PUT /api/restaurants/:id : Update a restaurant # TODO
-
-#### Restaurants Collections
-GET /api/collections/restaurants?user_id=xxx : List all restaurants on my list
-POST /api/collection/restaurants : Add restaurants to my list
+POST /api/restaurants : Create a new restaurant
 {
     user_id: xxx
-    restaurant_id: xxx
+    name: ...
 }
-DELETE /api/collection/restaurants/:id?user_id=xxx : Remove restaurants from my list
+DELETE /api/restaurants/:id : Delete a restaurant
+PUT /api/restaurants/:id : Update a restaurant
 
 ## High Level Architecture Design
 ### Server
@@ -49,4 +44,4 @@ Next.js -> Allow for Client and Server Side Rendering.
 Express.js -> Allow more flexibility to add additional Endpoints for data fetching / backend instead of relying on Next.js Router.
 
 ### Database
-In order to simplify deployments, sqlite3 is used.
+In order to simplify deployments, sqlite3 with in-memory database is used.

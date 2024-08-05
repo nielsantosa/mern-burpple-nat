@@ -1,0 +1,1 @@
+export const defaultImage = '/images/food-pasta-1.jpeg'
